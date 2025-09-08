@@ -1,3 +1,4 @@
+const { createUser } = require("../controller/userController");
 
 // Simulação de um banco de dados em memória
 let users = [ 
@@ -33,9 +34,23 @@ const create = (newUser) => {
     return userWithId;
 }
 
+//Função para deletar um usuário
+const deleteUser = (id) => {
+
+    //Descobrir o index do elemento para excluir 
+    const index = users.findIndex(user => user.id === id);
+
+    if(index !== -1){
+        const [deletedUser] = users.splice(index,1);
+        return deletedUser;
+    }
+
+    return null;
+}
 module.exports = {
     findAll,
     findById,
-    create
+    create,
+    deleteUser
 
 }
