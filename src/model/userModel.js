@@ -1,4 +1,4 @@
-const { createUser } = require("../controller/userController");
+// const { createUser } = require("../controller/userController");
 
 // Simulação de um banco de dados em memória
 let users = [ 
@@ -47,10 +47,24 @@ const deleteUser = (id) => {
 
     return null;
 }
+
+//Função para atualizar dados de um usuário
+const updateUser = (dataUser) => {
+    
+    //Descobrir o index do elemento para excluir 
+    const index = users.findIndex(user => user.id === dataUser.id);
+
+    //Alterando os dados
+    users[index] = dataUser;
+
+    return users[index];
+}
+
 module.exports = {
     findAll,
     findById,
     create,
-    deleteUser
+    deleteUser,
+    updateUser
 
 }

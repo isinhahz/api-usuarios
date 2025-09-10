@@ -60,9 +60,27 @@ if(deletedUser){
     res.status(400).json({mensagem: 'Informe o id do usuario corretamente'});
   }
 }
+
+//Método do controlador para editar um usuário
+const updateUser = (req, res) => {
+
+    //1 Passo - pegar os dados que foram enviados pelo Body (corpo) da requisição
+    const {id, name, email} = req.body;
+
+    //Validar se foi enviado o id
+    if(!id){
+        return res.status(400).json({mensagem: 'O id do usuário é obrigatório'});
+    }else{
+        const dataUser = userModel.updateUser({id,name,email});
+        res.status(200).json(dataUser);    
+    }
+
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
     createUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }
